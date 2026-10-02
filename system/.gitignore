@@ -1,0 +1,5 @@
+.DS_Store
+.env
+.env.*
+
+# Projects inside this folder have their own git repos. new-project adds them here.

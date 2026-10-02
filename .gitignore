@@ -2,7 +2,7 @@
 # Tree governance stays local: STATE.md is the maintainer's resume point and
 # is never committed. The founding brief lives in the maintainer's private
 # system, not here.
-STATE.md
-BRIEF.md
+/STATE.md
+/BRIEF.md
 
 .DS_Store
