@@ -33,6 +33,41 @@ Two agents can work on the same project, but only one of them changes it.
 
 If you can't tell which role you have, ask before editing anything.
 
+## Model routing
+
+Run the main session on the strongest model, and keep that model for the
+work only it should do: planning, judgment calls, putting results
+together, and decisions that depend on everything else. Hand the rest to
+a subagent on the cheapest model that can do it reliably.
+
+| Model | Good for | Subagent |
+|---|---|---|
+| Haiku | searching, listing, inventories, pulling facts out of files when it's clear what counts as right | `scout` |
+| Sonnet | routine coding, drafting, editing and moving files | `builder` |
+| Opus | analysis that needs judgment, reading messy or legal material | `analyst` |
+| the main model | planning and orchestration, or anything where explaining the task would take longer than doing it | none |
+
+- **Small jobs stay in the main session.** A single lookup or a one-line
+  edit costs less done directly than briefed to a subagent. Delegate when
+  the work is substantial: many files, long output, a long read.
+- **If you're not sure which tier, go one up.** A plausible-but-wrong
+  answer from a model that was too small costs more to fix than the
+  tokens it saved.
+- **Subagents return a digest, not a dump.** A subagent with a lot to say
+  writes it to a file in `$TMPDIR` and returns the path plus a summary of
+  ten lines or fewer. The main session opens the file only if the summary
+  doesn't settle it.
+- **Don't switch `/model` in the middle of a session.** The prompt cache
+  is per model, so switching makes the whole conversation get re-sent at
+  full price. For a cheaper model, use a subagent. To change the main
+  model, start a new session.
+- **Keep sessions short.** A long conversation is re-read on every turn,
+  and that adds up faster than model choice does. At a natural break, run
+  `/handoff` and then `/clear`, and carry on from `/resume`.
+
+This applies to Claude Code. Codex has no subagent models here, so it
+ignores the Subagent column.
+
 ## Where things go
 
 Every piece of information has exactly one home:
