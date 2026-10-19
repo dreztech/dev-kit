@@ -61,3 +61,23 @@ You can also just ask in plain words, for example "let's wrap up" or
   `memory/_inbox.md`, or say "remember that…", and `/curate` files it.
 - `AGENTS.md`: the rules both agents follow. Edit it whenever you want
   to change how they work. It's your system now.
+- `agents/`: Claude Code's cheaper-model helpers (see below).
+
+## 6. Saving tokens on long tasks
+
+Run Claude Code on your strongest model. It hands searching, routine
+coding and long reads to helpers on cheaper models by itself, as set out
+in the `Model routing` section of `AGENTS.md`:
+
+- **`scout`** (Haiku): finds and lists things.
+- **`builder`** (Sonnet): writes and edits to a clear spec.
+- **`analyst`** (Opus): reviews and analyses.
+
+You can also ask for one directly, for example "have scout find every
+place we call the payments API". Two habits matter as much as the
+helpers:
+
+- **Don't switch `/model` mid-session.** It re-sends the whole
+  conversation at full price.
+- **`/handoff` then `/clear` at a natural break.** A long session gets
+  more expensive with every turn.
