@@ -99,6 +99,18 @@ for s in "<root>"/skills/*/; do
 done
 ```
 
+**Subagents (Claude Code only).** These are the cheaper-model helpers the
+`Model routing` section of `AGENTS.md` delegates to. Link each one into
+Claude Code's agents folder. If a file with the same name already exists
+there, stop and ask before replacing it.
+
+```sh
+mkdir -p ~/.claude/agents
+for a in "<root>"/agents/*.md; do
+  ln -s "$a" ~/.claude/agents/"$(basename "$a")"
+done
+```
+
 **The rules, everywhere.** Projects can live outside the workspace, so
 both agents need to load the workspace `AGENTS.md` wherever they start.
 Show the user each change before you make it:
@@ -121,7 +133,7 @@ the choice made in step 1 (leave in place or move). New projects follow.
 
 1. Check that the links resolve. This should print nothing:
    ```sh
-   for l in ~/.claude/skills/* ~/.agents/skills/*; do [ -e "$l" ] || echo "broken: $l"; done
+   for l in ~/.claude/skills/* ~/.agents/skills/* ~/.claude/agents/*; do [ -e "$l" ] || echo "broken: $l"; done
    ```
 2. Follow `<root>/skills/resume/SKILL.md` in `<root>` and then in one
    project, and show the user both summaries.
@@ -133,6 +145,8 @@ the choice made in step 1 (leave in place or move). New projects follow.
    Both agents should show a summary in the same layout. If either
    doesn't recognise the skill, fully quit that agent and start it again,
    since skills load at startup. Then check the links from step 4 again.
+4. In that Claude Code session, type `/agents`. It should list `scout`,
+   `builder` and `analyst`.
 
 ## 7. Finish
 
