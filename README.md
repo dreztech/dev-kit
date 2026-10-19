@@ -11,6 +11,8 @@ terminal on a Mac. It includes:
   shared by the two agents.
 - **A curated memory folder:** facts go to an inbox, and `/curate` files
   them.
+- **Model routing:** Claude Code runs on your strongest model and hands
+  searching, routine coding and long reads to subagents on cheaper ones.
 
 ## Install
 
@@ -29,13 +31,19 @@ done, this folder isn't needed any more and you can delete it.
 
 Read `GETTING-STARTED.md` in your new workspace for the daily routine.
 
+**Already installed an earlier version?** Clone the kit again, run
+`claude` in it, and tell Claude: **"run UPGRADE.md"**. It adds what's new
+without touching your projects.
+
 ## What's in here
 
 | Path | What it is |
 |---|---|
 | `SETUP.md` | the install steps the agent follows |
+| `UPGRADE.md` | the steps that bring an existing workspace up to date |
 | `system/` | the workspace template that gets copied to `~/<name>-dev` |
 | `system/skills/` | `resume` `handoff` `curate` `clarify` `new-project` |
+| `system/agents/` | `scout` `builder` `analyst`, the cheaper-model subagents |
 | `system/templates/project/` | the files every project gets |
 
 ## Requirements
